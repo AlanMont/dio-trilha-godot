@@ -1,0 +1,91 @@
+[gd_scene load_steps=15 format=3 uid="uid://cgodss5wftq6c"]
+
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_bpko8"]
+[ext_resource type="Texture2D" uid="uid://dm1bufv2ro6so" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="1_coe4x"]
+[ext_resource type="Script" path="res://enemies/behaviors/follow_player.gd" id="1_ibsnk"]
+[ext_resource type="PackedScene" uid="uid://dxl5vh8oj4k2f" path="res://misc/skull.tscn" id="2_q8q5i"]
+[ext_resource type="PackedScene" uid="uid://cyrg1f1aanmh3" path="res://misc/meat.tscn" id="3_jnd0k"]
+[ext_resource type="AudioStream" uid="uid://cey1sqdg05tyt" path="res://addons/Sound/SE/damage_Received.ogg" id="6_exxfo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxhuk"]
+atlas = ExtResource("1_coe4x")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ng3b"]
+atlas = ExtResource("1_coe4x")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apokq"]
+atlas = ExtResource("1_coe4x")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aotu5"]
+atlas = ExtResource("1_coe4x")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jyxd"]
+atlas = ExtResource("1_coe4x")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shkxx"]
+atlas = ExtResource("1_coe4x")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dtjn6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxhuk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ng3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apokq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aotu5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jyxd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shkxx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o33ab"]
+radius = 14.0
+
+[node name="Pawn" type="CharacterBody2D" node_paths=PackedStringArray("damage_hit_sound") groups=["enemies"]]
+motion_mode = 1
+script = ExtResource("1_bpko8")
+health = 6
+death_prefab = ExtResource("2_q8q5i")
+damage_hit_sound = NodePath("AudioStreamPlayer")
+drop_items = Array[PackedScene]([ExtResource("3_jnd0k")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3, -9)
+sprite_frames = SubResource("SpriteFrames_dtjn6")
+autoplay = "default"
+frame_progress = 0.174136
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 2)
+shape = SubResource("CircleShape2D_o33ab")
+
+[node name="Follow Player" type="Node" parent="."]
+script = ExtResource("1_ibsnk")
+speed = 0.75
+
+[node name="DamageDigitMarker" type="Marker2D" parent="."]
+position = Vector2(-2, -36)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_exxfo")
+volume_db = -12.86
+pitch_scale = 0.76

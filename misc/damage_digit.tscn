@@ -1,0 +1,135 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7b70dv7hovu4"]
+
+[ext_resource type="Script" path="res://misc/damage_digit.gd" id="1_o5bdm"]
+
+[sub_resource type="Animation" id="Animation_ip7el"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.153893, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.233259),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.0441941),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.333333)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_b6igm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.333333)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7drp0"]
+_data = {
+"RESET": SubResource("Animation_b6igm"),
+"default": SubResource("Animation_ip7el")
+}
+
+[sub_resource type="SystemFont" id="SystemFont_cvjls"]
+font_names = PackedStringArray("Mega Man Battle Network")
+font_weight = 999
+
+[sub_resource type="LabelSettings" id="LabelSettings_0eu2j"]
+font = SubResource("SystemFont_cvjls")
+font_size = 24
+font_color = Color(0.80047, 0.208929, 0.137141, 1)
+outline_size = 8
+outline_color = Color(0.0229063, 0.00165833, 0.144693, 1)
+
+[node name="DamageDigit" type="Node2D"]
+script = ExtResource("1_o5bdm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7drp0")
+}
+autoplay = "default"
+
+[node name="Node2D" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.333333)
+
+[node name="Label" type="Label" parent="Node2D"]
+unique_name_in_owner = true
+offset_left = -39.0
+offset_top = -37.0
+offset_right = 58.0
+offset_bottom = -4.0
+text = "65"
+label_settings = SubResource("LabelSettings_0eu2j")
+horizontal_alignment = 1
+vertical_alignment = 1
